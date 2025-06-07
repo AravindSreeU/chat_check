@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Socket.IO chat</title>
+  <title>Chat_AP</title>
   <style>
       body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 
@@ -23,12 +23,14 @@
   </form>
   <script src="/socket.io/socket.io.js"></script>
 <script>
-  const socket = io({
-    auth: {
-      serverOffset: 0
-    },
-    ackTimeout: 10000,
-    retries: 3,
+  const socket = io(window.location.origin, {
+  auth: {
+    serverOffset: 0
+  },
+  ackTimeout: 10000,
+  retries: 3,
+});
+
   });
 
   const form = document.getElementById('form');
