@@ -63,6 +63,16 @@ if (cluster.isPrimary) {
           // Ignore other errors, client will retry
         }
       }
+    socket.on('clear chat', async () => {
+      try {
+        await db.run('DELETE FROM messages');
+        io.emit('chat cleared');
+        console.log("Chat history cleared by a user.");
+      } catch (err) {
+        console.error("Failed to clear chat:", err);
+    }
+});
+
     });
 
     if (!socket.recovered) {
