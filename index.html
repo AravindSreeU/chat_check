@@ -24,20 +24,19 @@
   <script src="/socket.io/socket.io.js"></script>
 <script>
   const socket = io(window.location.origin, {
-  auth: {
-    serverOffset: 0
-  },
-  ackTimeout: 10000,
-  retries: 3,
-});
-
+    path: "/socket.io", // ensure correct path
+    transports: ["websocket", "polling"], // WebSocket fallback
+    auth: {
+      serverOffset: 0
+    },
+    ackTimeout: 10000,
+    retries: 3,
   });
 
   const form = document.getElementById('form');
   const input = document.getElementById('input');
   const messages = document.getElementById('messages');
 
-  // Ask for username
   const username = prompt("Enter your username");
   socket.auth.username = username;
 
@@ -45,9 +44,7 @@
     e.preventDefault();
     if (input.value) {
       const clientOffset = `${socket.id}-${Date.now()}`;
-      socket.emit('chat message', { username, message: input.value }, clientOffset, () => {
-        // message acknowledged by server
-      });
+      socket.emit('chat message', { username, message: input.value }, clientOffset, () => {});
       input.value = '';
     }
   });
@@ -60,6 +57,7 @@
     socket.auth.serverOffset = serverOffset;
   });
 </script>
+
 
 </body>
 </html>
