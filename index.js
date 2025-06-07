@@ -34,9 +34,13 @@ if (cluster.isPrimary) {
   const app = express();
   const server = createServer(app);
   const io = new Server(server, {
-    connectionStateRecovery: {},
-    adapter: createAdapter()
+  path: "/socket.io",
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
   });
+
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
 
