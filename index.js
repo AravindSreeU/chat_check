@@ -83,11 +83,12 @@ if (cluster.isPrimary) {
     }
   });
 
-  const PORT = process.env.PORT || 10000;
-  const HOST = '0.0.0.0';
+  const port = process.env.PORT || 3000;
+  const host = '0.0.0.0';
 
-  app.listen(PORT, HOST, () => {
-  console.log(`Server running on http://${HOST}:${PORT}`);
+  server.listen(port, host, () => {
+  console.log(`Server running at http://${host}:${port}`);
 });
+
 
 }
